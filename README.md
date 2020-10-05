@@ -43,7 +43,7 @@ Ao terminar de usar os serviços, user o seguinte comando para para-los:
  docker-compose down
  ```
 
-Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost3333]()
+Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost:3333]()
 
  ## Como contribuir com o projeto?
 
