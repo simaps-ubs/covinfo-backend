@@ -1,30 +1,65 @@
-# Covinfo-Backend
-Backend do projeto Covinfo
+# Covinfo Back-end
 
-## Pré Requisitos do Sistema
+<p align="center">
+  <img src="./img/logo.svg" alt="logo">
+</p>
+
+O Back-end do projeto **Covinfo** é a camada que recebe as requisições do front-end, faz validações de regras de negócio e se integra diretamente ao banco de dados PostgreSql.
+
+## Tecnologias utilizadas
+
+1. [Node JS](https://nodejs.org/en/)
+2. [Docker](https://www.docker.com/what-docker)
+3. [PostgreSql](https://www.postgresql.org/)
+
+## Rodando da aplicação
 
 O projeto ultiliza a plataforma [Docker](https://www.docker.com/what-docker) para a configuração de ambiente, afim de evitar problemas de compatibilidade de sistema. Os passos abaixo podem ser seguidos para executar a aplicação usando a plataforma:
 
- 1. Instalação do [Docker](https://docs.docker.com/engine/installation/)
- 2. Instalação do [Docker Compose](https://docs.docker.com/compose/install/)
- 3. Clone o repositório usando o comando:
+1) Instalação do [Docker](https://docs.docker.com/engine/installation/)
+2) Instalação do [Docker Compose](https://docs.docker.com/compose/install/)
+3) Siga as seguintes etapas:
+
+Clone o repositório:
+
  ```
  git clone https://github.com/mecassauro/covinfo-backend.git
  ```
- 4. Crie uma conexao local do docker na sua máquina para que o docker do front e backend possam se comunicar:
+
+Crie uma conexao local do docker na sua máquina para que o docker do front e backend possam se comunicar:
  ```
  docker network create network-api
  ```
- 5. Crie e inicie os containers dos serviços:
+
+Crie e inicie os containers dos serviços:
 
  ```
  docker-compose build
  docker-compose up
  ```
 
- 6. Ao terminar de usar os serviços, user o seguinte comando para para-los:
+Ao terminar de usar os serviços, user o seguinte comando para para-los:
  ```
  docker-compose down
- ``` 
- 
- 7. Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost3333]()
+ ```
+
+Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost:3333]()
+
+ ## Como contribuir com o projeto?
+
+ <details><summary><b>Contribuição</b></summary>
+ 1. <a href="https://github.com/mecassauro/RADAR-frontend/blob/master/docs/CONTRIBUTING.md">Guia de Contribuição</a>
+ </details>
+
+<details><summary><b>Código de Conduta</b></summary>
+1. <a href="https://github.com/mecassauro/RADAR-frontend/blob/master/docs/CODE_OF_CONDUCT.md">Código de Conduta</a>
+</details>
+
+<details><summary><b>Políticas de Contribuição</b></summary>
+1. <a href="https://github.com/mecassauro/docs/blob/master/docs/gcs.md">Política de branchs/commits/</a>
+</details>
+
+
+
+
+
