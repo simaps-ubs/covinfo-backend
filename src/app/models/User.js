@@ -13,7 +13,7 @@ class User extends Model {
         image_url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3333/files/${this.avatar}`;
+            return `http://localhost:3333/files/${this.image_name}`;
           },
         },
       },
