@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
+
 import User from '../models/User';
+import Login from '../models/Login';
 
 class UserController {
   async store(req, res) {
@@ -12,18 +14,28 @@ class UserController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
+    const { name, email, password } = req.body;
 
-    const userExist = await User.findOne({ where: { email: req.body.email } });
+    const emailExists = await Login.findOne({
+      where: { email },
+    });
 
-    if (userExist) {
-      return res.status(400).json({ error: 'User already exists' });
+    if (emailExists) {
+      return res.status(400).json({ error: 'Email already exists' });
     }
 
-    const { id, name, email } = await User.create(req.body);
+    const { id, user_type } = await User.create({ name });
+
+    await Login.create({
+      email,
+      password,
+      user_id: id,
+    });
 
     return res.json({
       id,
       name,
+      user_type,
       email,
     });
   }
