@@ -1,9 +1,9 @@
 module.exports = {
   dialect: 'postgres',
   host: 'localhost',
-  username: 'postgres',
-  password: 'docker',
-  database: 'convinfo',
+  username: 'user_covinfo',
+  password: 'pgpassword',
+  database: 'covinfo',
   define: {
     timestamps: true,
     underscored: true,
