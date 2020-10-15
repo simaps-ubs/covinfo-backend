@@ -16,7 +16,7 @@ cache:
 
 stages:
   - Install
-  - Test
+#  - Test
   - Quality gate
 #  - Deploy
 
@@ -25,9 +25,9 @@ jobs:
     - stage: Install
       script:
         - yarn install
-    - stage: Test
-      script:
-        - yarn run test --passWithNoTests --watchAll=false --coverage
+#    - stage: Test
+#      script:
+#        - yarn run test --passWithNoTests --watchAll=false --coverage
     - stage: Quality gate
       script:
         - sonar-scanner
