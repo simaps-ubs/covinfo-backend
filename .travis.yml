@@ -1,0 +1,39 @@
+dist: trusty
+language: node_js
+node_js: 12.18.4
+
+#services:
+#  - docker
+
+addons:
+  sonarcloud:
+    organization: "mecassauro"
+    token: ${SONAR_TOKEN}
+
+cache:
+  directories:
+    - node_modules
+
+stages:
+  - Install
+  - Test
+  - Quality gate
+#  - Deploy
+
+jobs:
+  include:
+    - stage: Install
+      script:
+        - yarn install
+    - stage: Test
+      script:
+        - yarn run test --passWithNoTests --watchAll=false --coverage
+    - stage: Quality gate
+      script:
+        - sonar-scanner
+#    - stage: Deploy
+#      if: branch = master
+#      script:
+#        - docker build -t radar-frontend .
+#        - docker login
+#        - docker push
