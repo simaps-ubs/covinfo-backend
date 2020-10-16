@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('person', {
+    await queryInterface.createTable('persons', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -16,7 +16,7 @@ module.exports = {
       },
       person_auto_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'person', key: 'id' },
+        references: { model: 'persons', key: 'id' },
         allowNull: true,
       },
       document_number: {
