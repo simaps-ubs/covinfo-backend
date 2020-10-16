@@ -1,18 +1,18 @@
 import Sequelize, { Model } from 'sequelize';
 
-class User extends Model {
+class Comorbidity extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
-        user_type: Sequelize.STRING,
+        comorbidity_description: Sequelize.STRING,
       },
       {
         sequelize,
       }
     );
+
     return this;
   }
 }
 
-export default User;
+export default Comorbidity;
