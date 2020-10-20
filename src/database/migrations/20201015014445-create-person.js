@@ -67,6 +67,7 @@ module.exports = {
       activated_status: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
       created_at: {
         type: Sequelize.DATE,
