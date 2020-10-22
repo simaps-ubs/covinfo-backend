@@ -18,5 +18,6 @@ routes.get('/comorbidities', ComorbidityController.index);
 // Forms
 routes.post('/forms', FormController.store);
 routes.get('/forms', FormController.index);
+routes.get('/forms/:user_id', FormController.getUserForm);
 
 export default routes;

@@ -4,6 +4,7 @@ import Comorbidity from '../models/Comorbidity';
 import PersonComorbidity from '../models/PersonComorbidity';
 import Phone from '../models/Phone';
 import Address from '../models/Address';
+import { where } from 'sequelize';
 
 class FormController {
   async store(req, res) {
@@ -43,11 +44,17 @@ class FormController {
 
     const form = req.body;
 
-    // first form register
-    // if (!registerForm) {
+    const documentExists = await Person.findOne({
+      where: { document_number: form.document_number },
+    });
+
+    if(documentExists){
+      return res.status(400).json({success: false, message: 'Este documento ja foi registrado. Tente outro.'})
+    }
+
     const { id } = await Person.create({
       user_id,
-      person_auto_id: null,
+      person_auto_id: registerForm ? id : null,
       document_number: form.document_number,
       birth_date: form.birth_date,
       nacionality: form.nacionality,
@@ -82,7 +89,6 @@ class FormController {
         });
       });
     }
-    // }
 
     return res
       .status(200)
@@ -93,30 +99,53 @@ class FormController {
     const forms = await Person.findAll();
     return res.json(forms);
   }
+
+  async getUserForm(req, res){
+    const { person_id } = req.params;
+
+    const userForm = await Person.findOne({
+        include: [
+          {
+            model: Phone,
+            attributes: ['id', 'phone_code', 'phone_number'],
+          },
+        ],
+        attributes: [
+          'id',
+          'document_number',
+          'birth_date',
+          'nacionality',
+          'birth_city',
+          'birth_state',
+          'sex',
+          'breed',
+          'mother_name', 
+          'father_name', 
+          'home', 
+          'quantity_per_home', 
+          'activated_status',
+        ],
+        where:{ person_id }
+    })
+    
+    const comorbidities = Person.findAll({
+      include: [{
+        model: Comorbidity,
+        as: 'comorbidities',
+        required: false,
+        // Pass in the Product attributes that you want to retrieve
+        attributes: ['id', 'comorbidity_description'],
+        through: {
+          // This block of code allows you to retrieve the properties of the join table
+          model: PersonComorbidity,
+          as: 'personComobidity',
+        }
+      }]
+    })
+
+    return res.status(200).json(userForm, comorbidities)
+  }
+
 }
 
 export default new FormController();
-
-// {
-//   "user_id": 2,
-//   "document_number": 01203211169,
-//   "birth_date": "1995-09-05",
-//   "nacionality": "Brasil",
-//   "birth_city": "São Paulo",
-//   "birth_state": "São Paulo",
-//   "sex": "M",
-//   "breed": "Pardo",
-//   "mother_name": "Mônica Rocha",
-//   "father_name": "Renato Raimundo",
-//   "home": "Minha Casa minha vida!",
-//   "quantity_per_home": 2,
-
-//   "phone_number": 123456789,
-//   "phone_code": 61,
-
-//   "zip_code": 7555555555,
-//   "city": "TaguaYork",
-//   "state": "TT",
-
-//   "comorbidities": [1, 2]
-// }

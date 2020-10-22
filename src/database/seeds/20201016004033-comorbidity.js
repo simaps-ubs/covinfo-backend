@@ -1,6 +1,6 @@
 module.exports = {
-  up: (QueryInterface) => {
-    return QueryInterface.bulkInsert(
+  up: async (QueryInterface) => {
+    await QueryInterface.bulkInsert(
       'comorbidities',
       [
         {

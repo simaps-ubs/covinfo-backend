@@ -20,7 +20,7 @@ services:
     image: covinfo_image
     depends_on:
       - db
-    command: bash -c "yarn start"
+    command: bash -c "yarn sequelize db:migrate && yarn start"
     build: ./
     volumes:
       - .:/app
