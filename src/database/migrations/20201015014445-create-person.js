@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('persons', {
+    await queryInterface.createTable('people', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -16,7 +16,7 @@ module.exports = {
       },
       person_auto_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'persons', key: 'id' },
+        references: { model: 'people', key: 'id' },
         allowNull: true,
       },
       document_number: {
@@ -81,6 +81,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('person');
+    await queryInterface.dropTable('people');
   },
 };

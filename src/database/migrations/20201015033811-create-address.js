@@ -7,9 +7,9 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      person: {
+      person_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'persons', key: 'id' },
+        references: { model: 'people', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         allowNull: false,

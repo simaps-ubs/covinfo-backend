@@ -16,7 +16,7 @@ class Phone extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Persons, { foreignKey: 'person' });
+    this.belongsTo(models.Person, { foreignKey: 'person_id' });
   }
 }
 

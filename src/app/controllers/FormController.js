@@ -44,24 +44,79 @@ class FormController {
     const form = req.body;
 
     // first form register
-    if (!registerForm) {
-      const { id } = Person.create({
-        user_id,
-        person_auto_id: null,
-        document_number: form.document_number,
-        birth_date: form.birth_date,
-        nacionality: form.nacionality,
-        birth_city: form.birth_city,
-        birth_state: form.birth_state,
-        sex: form.sex,
-        breed: form.breed,
-        mother_name: form.mother_name,
-        father_name: form.father_name,
-        home: form.home,
-        quantity_per_home: form.quantity_per_home,
+    // if (!registerForm) {
+    const { id } = await Person.create({
+      user_id,
+      person_auto_id: null,
+      document_number: form.document_number,
+      birth_date: form.birth_date,
+      nacionality: form.nacionality,
+      birth_city: form.birth_city,
+      birth_state: form.birth_state,
+      sex: form.sex,
+      breed: form.breed,
+      mother_name: form.mother_name,
+      father_name: form.father_name,
+      home: form.home,
+      quantity_per_home: form.quantity_per_home,
+    });
+
+    await Phone.create({
+      person_id: id,
+      phone_number: form.phone_number,
+      phone_code: form.phone_code,
+    });
+
+    await Address.create({
+      person_id: id,
+      zip_code: form.zip_code,
+      city: form.city,
+      state: form.state,
+    });
+
+    if (form.comorbidities && form.comorbidities.length) {
+      form.comorbidities.forEach(async (comorbidity) => {
+        await PersonComorbidity.create({
+          person_id: id,
+          comorbidity,
+        });
       });
     }
+    // }
+
+    return res
+      .status(200)
+      .json({ success: true, message: 'Ficha cadastrada com sucesso' });
+  }
+
+  async index(req, res) {
+    const forms = await Person.findAll();
+    return res.json(forms);
   }
 }
 
-export default FormController;
+export default new FormController();
+
+// {
+//   "user_id": 2,
+//   "document_number": 01203211169,
+//   "birth_date": "1995-09-05",
+//   "nacionality": "Brasil",
+//   "birth_city": "São Paulo",
+//   "birth_state": "São Paulo",
+//   "sex": "M",
+//   "breed": "Pardo",
+//   "mother_name": "Mônica Rocha",
+//   "father_name": "Renato Raimundo",
+//   "home": "Minha Casa minha vida!",
+//   "quantity_per_home": 2,
+
+//   "phone_number": 123456789,
+//   "phone_code": 61,
+
+//   "zip_code": 7555555555,
+//   "city": "TaguaYork",
+//   "state": "TT",
+
+//   "comorbidities": [1, 2]
+// }

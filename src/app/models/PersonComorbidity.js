@@ -18,8 +18,8 @@ class PersonComorbidity extends Model {
   }
 
   static associate(models) {
-    Person.belongsToMany(models.Comorbidity, {through: PersonComorbidity});
-    Comorbidity.belongsToMany(models.Person, {through: PersonComorbidity});
+    Person.belongsToMany(models.Comorbidity, { through: PersonComorbidity });
+    Comorbidity.belongsToMany(models.Person, { through: PersonComorbidity });
   }
 }
 

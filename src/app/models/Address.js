@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Adress extends Model {
+class Address extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -17,8 +17,8 @@ class Adress extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Persons, { foreignKey: 'person' });
+    this.belongsTo(models.Person, { foreignKey: 'person_id' });
   }
 }
 
-export default Adress;
+export default Address;
