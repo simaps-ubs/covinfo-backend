@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 import User from '../models/User';
 import Login from '../models/Login';
+import Mail from '../../lib/Mail';
 
 class UserController {
   async store(req, res) {
@@ -38,6 +39,36 @@ class UserController {
       user_type,
       email,
     });
+  }
+
+  async resetPassword(req, res) {
+    const schema = Yup.object().shape({
+      email: Yup.string().email().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+    const { email } = req.body;
+
+    const login = await Login.findOne({
+      where: { email },
+      include: ['user_id', 'email'],
+    });
+
+    if (login) {
+      return res.status(404).json({ error: 'Email not found' });
+    }
+
+    const user = User.findOne(login.user_id);
+
+    await Mail.sendMail({
+      from: 'Equipe covinfo <no-replay@covinfo.com.br>',
+      to: `${user.name} <${email}>`,
+      subjetc: 'Recuperação de Senha!',
+      text: `Você pediu para resetar sua senha ${user.name}`,
+    });
+
   }
 }
 

@@ -109,3 +109,6 @@ dist
 dados/
 
 .idea
+
+yarn.lock
+yarn-error.log
