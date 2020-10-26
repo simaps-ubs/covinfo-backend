@@ -53,14 +53,14 @@ class UserController {
 
     const login = await Login.findOne({
       where: { email },
-      include: ['user_id', 'email'],
+      attributes: ['user_id', 'email'],
     });
 
-    if (login) {
+    if (!login) {
       return res.status(404).json({ error: 'Email not found' });
     }
 
-    const user = User.findOne(login.user_id);
+    const user = await User.findByPk(login.user_id);
 
     await Mail.sendMail({
       from: 'Equipe covinfo <no-replay@covinfo.com.br>',
@@ -69,6 +69,7 @@ class UserController {
       text: `Você pediu para resetar sua senha ${user.name}`,
     });
 
+    return res.json(user);
   }
 }
 
