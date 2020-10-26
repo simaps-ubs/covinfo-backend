@@ -63,10 +63,14 @@ class UserController {
     const user = await User.findByPk(login.user_id);
 
     await Mail.sendMail({
-      from: 'Equipe covinfo <no-replay@covinfo.com.br>',
-      to: `${user.name} <${email}>`,
-      subjetc: 'Recuperação de Senha!',
-      text: `Você pediu para resetar sua senha ${user.name}`,
+      from: 'Equipe Covinfo <equipe@covinfo.com>',
+      to: `${user.name} <${login.email}>`,
+      subject: 'Seja Bem Vindo!',
+      template: 'reset-password',
+      context: {
+        name: `${user.name}`,
+        link: `localhost:3000/reset_password?userId=${user.id}`,
+      },
     });
 
     return res.json(user);
