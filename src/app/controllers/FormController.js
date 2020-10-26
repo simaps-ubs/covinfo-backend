@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
+import { where } from 'sequelize';
 import Person from '../models/Person';
 import Comorbidity from '../models/Comorbidity';
 import PersonComorbidity from '../models/PersonComorbidity';
 import Phone from '../models/Phone';
 import Address from '../models/Address';
-import { where } from 'sequelize';
 
 class FormController {
   async store(req, res) {
@@ -43,18 +43,20 @@ class FormController {
     });
 
     const form = req.body;
-
     const documentExists = await Person.findOne({
       where: { document_number: form.document_number },
     });
 
-    if(documentExists){
-      return res.status(400).json({success: false, message: 'Este documento ja foi registrado. Tente outro.'})
+    if (documentExists) {
+      return res.status(400).json({
+        success: false,
+        message: 'Este documento ja foi registrado. Tente outro.',
+      });
     }
 
     const { id } = await Person.create({
       user_id,
-      person_auto_id: registerForm ? id : null,
+      user_auto_id: registerForm ? user_id : null,
       document_number: form.document_number,
       birth_date: form.birth_date,
       nacionality: form.nacionality,
@@ -85,7 +87,7 @@ class FormController {
       form.comorbidities.forEach(async (comorbidity) => {
         await PersonComorbidity.create({
           person_id: id,
-          comorbidity,
+          comorbidity_id: comorbidity,
         });
       });
     }
@@ -100,52 +102,53 @@ class FormController {
     return res.json(forms);
   }
 
-  async getUserForm(req, res){
+  async getUserForm(req, res) {
     const { person_id } = req.params;
 
     const userForm = await Person.findOne({
-        include: [
-          {
-            model: Phone,
-            attributes: ['id', 'phone_code', 'phone_number'],
+      include: [
+        {
+          model: Phone,
+          attributes: ['id', 'phone_code', 'phone_number'],
+        },
+        {
+          model: Address,
+          attributes: ['id', 'zip_code', 'city', 'state'],
+        },
+        {
+          model: Comorbidity,
+          as: 'Comorbidities',
+          required: false,
+          attributes: ['id', 'comorbidity_description'],
+          through: {
+            model: PersonComorbidity,
+            as: 'personComobidity',
+            attributes: [],
           },
-        ],
-        attributes: [
-          'id',
-          'document_number',
-          'birth_date',
-          'nacionality',
-          'birth_city',
-          'birth_state',
-          'sex',
-          'breed',
-          'mother_name', 
-          'father_name', 
-          'home', 
-          'quantity_per_home', 
-          'activated_status',
-        ],
-        where:{ person_id }
-    })
-    
-    const comorbidities = Person.findAll({
-      include: [{
-        model: Comorbidity,
-        as: 'comorbidities',
-        required: false,
-        // Pass in the Product attributes that you want to retrieve
-        attributes: ['id', 'comorbidity_description'],
-        through: {
-          // This block of code allows you to retrieve the properties of the join table
-          model: PersonComorbidity,
-          as: 'personComobidity',
-        }
-      }]
-    })
+        },
+      ],
+      attributes: [
+        'id',
+        'document_number',
+        'birth_date',
+        'nacionality',
+        'birth_city',
+        'birth_state',
+        'sex',
+        'breed',
+        'mother_name',
+        'father_name',
+        'home',
+        'quantity_per_home',
+        'activated_status',
+      ],
+      where: { id: person_id },
+    });
 
-    return res.status(200).json(userForm, comorbidities)
+    // console.log(userForm.dataValues);
+    userForm.sex = userForm.sex.trim();
+    return res.status(200).json(userForm);
   }
-
 }
 
 export default new FormController();

@@ -27,6 +27,17 @@ class Person extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
+    this.belongsTo(models.User, { foreignKey: 'user_auto_id' });
+
+    this.hasOne(models.Phone);
+    this.hasOne(models.Address);
+
+    this.belongsToMany(models.Comorbidity, {
+      through: 'PersonComorbidity',
+      as: 'Comorbidities',
+      foreignKey: 'person_id',
+      otherKey: 'comorbidity_id',
+    });
   }
 }
 

@@ -14,9 +14,9 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      person_auto_id: {
+      user_auto_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'people', key: 'id' },
+        references: { model: 'users', key: 'id' },
         allowNull: true,
       },
       document_number: {

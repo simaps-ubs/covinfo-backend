@@ -14,11 +14,19 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      comorbidity: {
+      comorbidity_id: {
         type: Sequelize.INTEGER,
         references: { model: 'comorbidities', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
     });

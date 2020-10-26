@@ -13,6 +13,15 @@ class Comorbidity extends Model {
 
     return this;
   }
+
+  static associate(models) {
+    this.belongsToMany(models.Person, {
+      through: 'PersonComorbidity',
+      as: 'people',
+      foreignKey: 'comorbidity_id',
+      otherKey: 'person_id',
+    });
+  }
 }
 
 export default Comorbidity;

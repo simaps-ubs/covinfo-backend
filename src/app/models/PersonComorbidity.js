@@ -6,8 +6,8 @@ class PersonComorbidity extends Model {
   static init(sequelize) {
     super.init(
       {
-        person: Sequelize.INTEGER,
-        comorbidity: Sequelize.INTEGER,
+        comorbidity_id: Sequelize.INTEGER,
+        person_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -18,8 +18,14 @@ class PersonComorbidity extends Model {
   }
 
   static associate(models) {
-    Person.belongsToMany(models.Comorbidity, { through: PersonComorbidity });
-    Comorbidity.belongsToMany(models.Person, { through: PersonComorbidity });
+    Person.belongsToMany(models.Comorbidity, {
+      through: PersonComorbidity,
+      foreignKey: 'comorbidity_id',
+    });
+    Comorbidity.belongsToMany(models.Person, {
+      through: PersonComorbidity,
+      foreignKey: 'person_id',
+    });
   }
 }
 
