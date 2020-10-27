@@ -5,12 +5,16 @@ import Comorbidity from '../models/Comorbidity';
 import PersonComorbidity from '../models/PersonComorbidity';
 import Phone from '../models/Phone';
 import Address from '../models/Address';
+import User from '../models/User';
 
 class FormController {
   async store(req, res) {
     const { user_id } = req.body;
 
     const schema = Yup.object().shape({
+      // user
+      name: Yup.string().required(),
+
       // person
       document_number: Yup.number().required(),
       birth_date: Yup.date().required(),
@@ -54,8 +58,16 @@ class FormController {
       });
     }
 
+    let user_dependent = '';
+    if (registerForm) {
+      user_dependent = await User.create({
+        name: form.name,
+        user_type: 'pessoa',
+      });
+    }
+
     const { id } = await Person.create({
-      user_id,
+      user_id: registerForm ? user_dependent.id : user_id,
       user_auto_id: registerForm ? user_id : null,
       document_number: form.document_number,
       birth_date: form.birth_date,
@@ -97,13 +109,58 @@ class FormController {
       .json({ success: true, message: 'Ficha cadastrada com sucesso' });
   }
 
-  async index(req, res) {
-    const forms = await Person.findAll();
-    return res.json(forms);
+  async getUserDependentsForm(req, res) {
+    const { user_id } = req.params;
+
+    const userForm = await Person.findAll({
+      where: { user_auto_id: user_id },
+      include: [
+        {
+          model: User,
+          attributes: ['name', 'user_type'],
+        },
+        {
+          model: Phone,
+          attributes: ['id', 'phone_code', 'phone_number'],
+        },
+        {
+          model: Address,
+          attributes: ['id', 'zip_code', 'city', 'state'],
+        },
+        {
+          model: Comorbidity,
+          as: 'Comorbidities',
+          required: false,
+          attributes: ['id', 'comorbidity_description'],
+          through: {
+            model: PersonComorbidity,
+            as: 'personComobidity',
+            attributes: [],
+          },
+        },
+      ],
+      attributes: [
+        'id',
+        'document_number',
+        'birth_date',
+        'nacionality',
+        'birth_city',
+        'birth_state',
+        'sex',
+        'breed',
+        'mother_name',
+        'father_name',
+        'home',
+        'quantity_per_home',
+        'activated_status',
+      ],
+    });
+
+    return res.status(200).json(userForm);
   }
 
   async getUserForm(req, res) {
-    const { person_id } = req.params;
+    const { user_id } = req.params;
 
     const userForm = await Person.findOne({
       include: [
@@ -142,11 +199,9 @@ class FormController {
         'quantity_per_home',
         'activated_status',
       ],
-      where: { id: person_id },
+      where: { user_id },
     });
 
-    // console.log(userForm.dataValues);
-    userForm.sex = userForm.sex.trim();
     return res.status(200).json(userForm);
   }
 }

@@ -9,7 +9,7 @@ class Person extends Model {
         nacionality: Sequelize.STRING,
         birth_city: Sequelize.STRING,
         birth_state: Sequelize.STRING,
-        sex: Sequelize.CHAR,
+        sex: Sequelize.STRING(1),
         breed: Sequelize.STRING,
         mother_name: Sequelize.STRING,
         father_name: Sequelize.STRING,

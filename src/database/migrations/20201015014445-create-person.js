@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false,
       },
       sex: {
-        type: Sequelize.CHAR,
+        type: Sequelize.STRING(1),
         allowNull: false,
       },
       breed: {
