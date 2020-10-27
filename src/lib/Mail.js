@@ -15,6 +15,7 @@ class Mail {
           pass: account.pass,
         },
       });
+
       this.configureTemplates();
     });
   }

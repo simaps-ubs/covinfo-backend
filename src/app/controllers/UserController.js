@@ -2,7 +2,9 @@ import * as Yup from 'yup';
 
 import User from '../models/User';
 import Login from '../models/Login';
-import Mail from '../../lib/Mail';
+
+import ResetPassword from '../jobs/ResetPassword';
+import Queue from '../../lib/Queue';
 
 class UserController {
   async store(req, res) {
@@ -54,26 +56,28 @@ class UserController {
     const login = await Login.findOne({
       where: { email },
       attributes: ['user_id', 'email'],
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
     });
 
     if (!login) {
       return res.status(404).json({ error: 'Email not found' });
     }
 
-    const user = await User.findByPk(login.user_id);
+    const user = {
+      id: login.user_id,
+      name: login.user.name,
+      email: login.email,
+    };
 
-    await Mail.sendMail({
-      from: 'Equipe Covinfo <equipe@covinfo.com>',
-      to: `${user.name} <${login.email}>`,
-      subject: 'Seja Bem Vindo!',
-      template: 'reset-password',
-      context: {
-        name: `${user.name}`,
-        link: `localhost:3000/reset_password?userId=${user.id}`,
-      },
-    });
+    await Queue.add(ResetPassword.key, { user });
 
-    return res.json(user);
+    return res.json(login);
   }
 }
 
