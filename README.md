@@ -1,3 +1,9 @@
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_RADAR-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_RADAR-backend&metric=bugs)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_RADAR-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_RADAR-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Build Status](https://travis-ci.org/mecassauro/covinfo-backend.svg?branch=master)](https://travis-ci.org/mecassauro/covinfo-backend)
+
 # Covinfo Back-end
 
 <p align="center">
@@ -44,6 +50,10 @@ Ao terminar de usar os serviços, user o seguinte comando para para-los:
  ```
 
 Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost:3333]()
+
+## Análise estática do código
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
 
  ## Como contribuir com o projeto?
 
