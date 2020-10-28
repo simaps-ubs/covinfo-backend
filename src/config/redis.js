@@ -1,4 +1,4 @@
 export default {
-  host: '192.168.99.103',
+  host: 'redis',
   port: 6379,
 };

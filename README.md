@@ -37,6 +37,11 @@ Crie uma conexao local do docker na sua máquina para que o docker do front e ba
  docker network create network-api
  ```
 
+Crie uma conexao local do docker na sua máquina para que o docker do redis e backend possam se comunicar:
+ ```
+ docker network create network-queue
+ ```
+
 Crie e inicie os containers dos serviços:
 
  ```
