@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  db:
-    container_name: database
+  covinfo_db_service:
+    container_name: covinfo_db
     restart: always
     image: postgres
     environment:
@@ -15,12 +15,12 @@ services:
       - network-api
     volumes:
       - ./dados:/var/lib/postgresql/data
-  api:
-    container_name: covinfo_container
-    image: covinfo_image
+  covinfo_api_service:
+    container_name: covinfo_api_container
+    image: covinfo_api_image
     depends_on:
-      - db
-    command: bash -c "yarn start"
+      - covinfo_db_service
+    command: bash -c "yarn sequelize db:migrate && yarn sequelize db:seed:all && yarn start"
     build: ./
     volumes:
       - .:/app
