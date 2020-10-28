@@ -6,6 +6,7 @@ import PersonComorbidity from '../models/PersonComorbidity';
 import Phone from '../models/Phone';
 import Address from '../models/Address';
 import User from '../models/User';
+import AppError from '../../errors/AppError';
 
 class FormController {
   async store(req, res) {
@@ -39,7 +40,7 @@ class FormController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Missing value!' });
+      throw new AppError('Está faltando algum valor', 400);
     }
 
     const registerForm = await Person.findOne({
@@ -52,10 +53,7 @@ class FormController {
     });
 
     if (documentExists) {
-      return res.status(400).json({
-        success: false,
-        message: 'Este documento ja foi registrado. Tente outro.',
-      });
+      throw new AppError('Este documento ja foi registrado. Tente outro.', 400);
     }
 
     let user_dependent = '';
@@ -111,7 +109,6 @@ class FormController {
 
   async getUserDependentsForm(req, res) {
     const { user_id } = req.params;
-
     const userForm = await Person.findAll({
       where: { user_auto_id: user_id },
       include: [

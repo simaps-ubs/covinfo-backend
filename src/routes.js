@@ -3,8 +3,9 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import ComorbidityController from './app/controllers/ComorbidityController';
 import FormController from './app/controllers/FormController';
+import 'express-async-errors';
 
-const routes = new Router();
+const routes = Router();
 
 // Users
 routes.post('/users', UserController.store);
