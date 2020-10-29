@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  db:
-    container_name: database
+  covinfo_db_service:
+    container_name: covinfo_db
     restart: always
     image: postgres
     environment:
@@ -25,13 +25,13 @@ services:
     networks:
       - network-queue
 
-  api:
-    container_name: covinfo_container
-    image: covinfo_image
+  covinfo_api_service:
+    container_name: covinfo_api_container
+    image: covinfo_api_image
     depends_on:
-      - db
+      - covinfo_db_service
       - redis
-    command: bash -c "yarn sequelize db:migrate && yarn start"
+    command: bash -c "yarn sequelize db:migrate && yarn sequelize db:seed:all && yarn start"
     build: ./
     volumes:
       - .:/app
@@ -47,7 +47,7 @@ services:
     image: covinfo_image
     command: yarn queue
     depends_on:
-      - db
+      - covinfo_db_service
       - redis
     networks:
       - network-api

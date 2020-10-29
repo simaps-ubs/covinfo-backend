@@ -110,5 +110,6 @@ dados/
 
 .idea
 
-yarn.lock
-yarn-error.log
+# env
+.env
+.env.test

@@ -9,7 +9,7 @@ class Person extends Model {
         nacionality: Sequelize.STRING,
         birth_city: Sequelize.STRING,
         birth_state: Sequelize.STRING,
-        sex: Sequelize.CHAR,
+        sex: Sequelize.STRING(1),
         breed: Sequelize.STRING,
         mother_name: Sequelize.STRING,
         father_name: Sequelize.STRING,
@@ -27,6 +27,17 @@ class Person extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
+    this.belongsTo(models.User, { foreignKey: 'user_auto_id' });
+
+    this.hasOne(models.Phone);
+    this.hasOne(models.Address);
+
+    this.belongsToMany(models.Comorbidity, {
+      through: 'PersonComorbidity',
+      as: 'Comorbidities',
+      foreignKey: 'person_id',
+      otherKey: 'comorbidity_id',
+    });
   }
 }
 

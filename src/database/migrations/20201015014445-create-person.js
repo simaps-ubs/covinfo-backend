@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('person', {
+    await queryInterface.createTable('people', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -14,9 +14,9 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      person_auto_id: {
+      user_auto_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'person', key: 'id' },
+        references: { model: 'users', key: 'id' },
         allowNull: true,
       },
       document_number: {
@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false,
       },
       sex: {
-        type: Sequelize.CHAR,
+        type: Sequelize.STRING(1),
         allowNull: false,
       },
       breed: {
@@ -67,6 +67,7 @@ module.exports = {
       activated_status: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -80,6 +81,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('person');
+    await queryInterface.dropTable('people');
   },
 };
