@@ -9,6 +9,8 @@ const routes = Router();
 
 // Users
 routes.post('/users', UserController.store);
+routes.post('/users/forgot-password', UserController.forgotPassword);
+routes.put('/users/:id/reset-password', UserController.resetPassword);
 
 // Sessions
 routes.post('/sessions', SessionController.store);

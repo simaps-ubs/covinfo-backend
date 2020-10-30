@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import User from '../app/models/User';
 import Login from '../app/models/Login';
 import Person from '../app/models/Person';
+import Notification from '../app/models/Notification';
 import Phone from '../app/models/Phone';
 import Address from '../app/models/Address';
 import PersonComorbidity from '../app/models/PersonComorbidity';
@@ -14,6 +15,7 @@ const models = [
   User,
   Login,
   Person,
+  Notification,
   Phone,
   Address,
   PersonComorbidity,
@@ -28,11 +30,13 @@ class Database {
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    models
-      .map((model) => model.init(this.connection))
-      .map(
-        (model) => model.associate && model.associate(this.connection.models)
-      );
+    models.forEach((model) => {
+      return model.init(this.connection);
+    });
+
+    models.forEach((model) => {
+      return model.associate && model.associate(this.connection.models);
+    });
   }
 }
 

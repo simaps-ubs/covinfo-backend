@@ -10,6 +10,9 @@ addons:
     organization: "mecassauro"
     token: ${SONAR_TOKEN}
 
+install:
+  - yarn
+
 cache:
   directories:
     - node_modules
