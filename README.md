@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=bugs)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
+=======
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=bugs)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+>>>>>>> 51bf00e0f1dd2a936e339e0e998dd82a8b26c093
 [![Build Status](https://travis-ci.org/mecassauro/covinfo-backend.svg?branch=master)](https://travis-ci.org/mecassauro/covinfo-backend)
 
 # Covinfo Back-end
@@ -37,6 +44,11 @@ Crie uma conexao local do docker na sua máquina para que o docker do front e ba
  docker network create network-api
  ```
 
+Crie uma conexao local do docker na sua máquina para que o docker do redis e backend possam se comunicar:
+ ```
+ docker network create network-queue
+ ```
+
 Crie e inicie os containers dos serviços:
 
  ```
@@ -53,7 +65,7 @@ Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost:3333]()
 
 ## Análise estática do código
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
 
  ## Como contribuir com o projeto?
 

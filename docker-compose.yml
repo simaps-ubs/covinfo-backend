@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  db:
-    container_name: database
+  covinfo_db_service:
+    container_name: covinfo_db
     restart: always
     image: postgres
     environment:
@@ -15,12 +15,23 @@ services:
       - network-api
     volumes:
       - ./dados:/var/lib/postgresql/data
-  api:
-    container_name: covinfo_container
-    image: covinfo_image
+
+  redis:
+    container_name: redis_queue
+    image: redis
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    ports:
+      - "6379:6379"
+    networks:
+      - network-queue
+
+  covinfo_api_service:
+    container_name: covinfo_api_container
+    image: covinfo_api_image
     depends_on:
-      - db
-    command: bash -c "yarn start"
+      - covinfo_db_service
+      - redis
+    command: bash -c "yarn sequelize db:migrate && yarn sequelize db:seed:all && yarn start"
     build: ./
     volumes:
       - .:/app
@@ -29,7 +40,23 @@ services:
       - '3333:3333'
     networks:
       - network-api
+      - network-queue
+
+  api-queue:
+    build: ./
+    image: covinfo_image
+    command: yarn queue
+    depends_on:
+      - covinfo_db_service
+      - redis
+    networks:
+      - network-api
+      - network-queue
+
 networks:
   network-api:
     external:
       name: network-api
+  network-queue:
+    external:
+      name: network-queue
