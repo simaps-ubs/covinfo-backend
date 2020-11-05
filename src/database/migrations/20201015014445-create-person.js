@@ -14,6 +14,13 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
+      address_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'addresses', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
+      },
       user_auto_id: {
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id' },
@@ -53,10 +60,6 @@ module.exports = {
         allowNull: false,
       },
       father_name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      home: {
         type: Sequelize.STRING,
         allowNull: false,
       },

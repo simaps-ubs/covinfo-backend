@@ -7,6 +7,11 @@ class Address extends Model {
         zip_code: Sequelize.BIGINT,
         city: Sequelize.STRING,
         state: Sequelize.STRING,
+        street: Sequelize.STRING,
+        house_number: Sequelize.STRING,
+        house_situation: Sequelize.STRING,
+        lat: Sequelize.STRING,
+        lng: Sequelize.STRING,
       },
       {
         sequelize,
@@ -14,10 +19,6 @@ class Address extends Model {
     );
 
     return this;
-  }
-
-  static associate(models) {
-    this.belongsTo(models.Person, { foreignKey: 'person_id' });
   }
 }
 

@@ -7,22 +7,35 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      person_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'people', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false,
-      },
       zip_code: {
         type: Sequelize.BIGINT,
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       city: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      state: {
+      street: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      house_number: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      house_situation: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      lat: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      lng: {
         type: Sequelize.STRING,
         allowNull: false,
       },
