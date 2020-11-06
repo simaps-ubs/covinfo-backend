@@ -13,7 +13,6 @@ class Person extends Model {
         breed: Sequelize.STRING,
         mother_name: Sequelize.STRING,
         father_name: Sequelize.STRING,
-        home: Sequelize.STRING,
         quantity_per_home: Sequelize.INTEGER,
         activated_status: Sequelize.INTEGER,
       },
@@ -27,10 +26,10 @@ class Person extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
-    this.belongsTo(models.User, { foreignKey: 'user_auto_id' });
+    // this.belongsTo(models.User, { foreignKey: 'user_auto_id' });
+    this.belongsTo(models.Address, { foreignKey: 'address_id' });
 
     this.hasOne(models.Phone);
-    this.hasOne(models.Address);
 
     this.belongsToMany(models.Comorbidity, {
       through: 'PersonComorbidity',
