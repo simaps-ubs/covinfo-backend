@@ -9,7 +9,7 @@ class Address extends Model {
         state: Sequelize.STRING,
         street: Sequelize.STRING,
         house_number: Sequelize.STRING,
-        house_situation: Sequelize.STRING,
+        home_situation: Sequelize.STRING,
         lat: Sequelize.STRING,
         lng: Sequelize.STRING,
       },

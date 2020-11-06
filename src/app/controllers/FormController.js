@@ -11,10 +11,8 @@ import AppError from '../../errors/AppError';
 class FormController {
   async storeProviderPerson(req, res) {
     const { user_id } = req.body;
-    const schema = Yup.object().shape({
-      // user
-      name: Yup.string().required(),
 
+    const schema = Yup.object().shape({
       // person
       document_number: Yup.number().required(),
       birth_date: Yup.date().required(),
@@ -33,7 +31,7 @@ class FormController {
       city: Yup.string().required(),
       street: Yup.string().required(),
       house_number: Yup.string().required(),
-      house_situation: Yup.string().required(),
+      home_situation: Yup.string().required(),
       lat: Yup.string().required(),
       lng: Yup.string().required(),
 
@@ -61,7 +59,7 @@ class FormController {
       state: form.state,
       street: form.street,
       house_number: form.house_number,
-      house_situation: form.house_situation,
+      home_situation: form.home_situation,
       lat: form.lat,
       lng: form.lng,
     });
@@ -104,6 +102,7 @@ class FormController {
 
   async storeDependent(req, res) {
     const { provider_user_id } = req.body;
+
     const schema = Yup.object().shape({
       // user
       name: Yup.string().required(),
@@ -137,7 +136,12 @@ class FormController {
       throw new AppError('Este documento ja foi registrado. Tente outro.', 400);
     }
 
-    const providerUser = User.find({ where: { user_id: provider_user_id } });
+    console.log('ANTES DO AQUI');
+    const providerUser = await Person.findOne({
+      where: { user_id: provider_user_id },
+    });
+
+    console.log('AQUI', providerUser);
 
     if (!providerUser) {
       throw new AppError('Usuário responsável não encontrado', 400);
@@ -145,7 +149,7 @@ class FormController {
 
     const user_dependent = await User.create({
       name: form.name,
-      user_type: 'cidadão',
+      user_type: 'cidadao',
     });
 
     const { id } = await Person.create({
@@ -160,8 +164,7 @@ class FormController {
       breed: form.breed,
       mother_name: form.mother_name,
       father_name: form.father_name,
-      quantity_per_home: providerUser.quantity_per_home,
-      address_id: providerUser.address_id,
+      address_id: providerUser.dataValues.address_id,
     });
 
     await Phone.create({
@@ -187,8 +190,8 @@ class FormController {
 
   async getUserDependentsForm(req, res) {
     const { user_id } = req.params;
+
     const userForm = await Person.findAll({
-      where: { user_auto_id: user_id },
       include: [
         {
           model: User,
@@ -207,7 +210,7 @@ class FormController {
             'state',
             'street',
             'house_number',
-            'house_situation',
+            'home_situation',
             'lat',
             'lng',
           ],
@@ -235,9 +238,9 @@ class FormController {
         'breed',
         'mother_name',
         'father_name',
-        'quantity_per_home',
         'activated_status',
       ],
+      where: { user_auto_id: user_id },
     });
 
     return res.status(200).json(userForm);
@@ -261,7 +264,7 @@ class FormController {
             'state',
             'street',
             'house_number',
-            'house_situation',
+            'home_situation',
             'lat',
             'lng',
           ],

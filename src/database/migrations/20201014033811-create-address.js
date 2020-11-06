@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      house_situation: {
+      home_situation: {
         type: Sequelize.STRING,
         allowNull: false,
       },

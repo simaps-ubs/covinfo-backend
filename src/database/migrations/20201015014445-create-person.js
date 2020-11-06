@@ -65,7 +65,7 @@ module.exports = {
       },
       quantity_per_home: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       activated_status: {
         type: Sequelize.INTEGER,
