@@ -19,7 +19,8 @@ routes.post('/sessions', SessionController.store);
 routes.get('/comorbidities', ComorbidityController.index);
 
 // Forms
-routes.post('/forms', FormController.store);
+routes.post('/forms', FormController.storeProviderPerson);
+routes.post('/forms/dependents', FormController.storeDependent);
 routes.get('/forms/:user_id', FormController.getUserForm);
 routes.get('/forms/dependents/:user_id', FormController.getUserDependentsForm);
 
