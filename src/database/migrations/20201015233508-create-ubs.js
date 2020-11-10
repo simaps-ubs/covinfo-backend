@@ -1,18 +1,18 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('ubs', {
-      id:{ 
+      id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      ubs_identification:{
+      ubs_identification: {
         type: Sequelize.BIGINT,
         allowNull: false,
         unique: true,
       },
-      city:{
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false,
@@ -22,5 +22,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('ubs');
-  }
+  },
 };
