@@ -4,7 +4,7 @@ class Person extends Model {
   static init(sequelize) {
     super.init(
       {
-        document_number: Sequelize.BIGINT,
+        document_number: Sequelize.STRING,
         birth_date: Sequelize.DATE,
         nationality: Sequelize.STRING,
         birth_city: Sequelize.STRING,
