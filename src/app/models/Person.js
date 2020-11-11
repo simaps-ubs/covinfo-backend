@@ -6,7 +6,7 @@ class Person extends Model {
       {
         document_number: Sequelize.BIGINT,
         birth_date: Sequelize.DATE,
-        nacionality: Sequelize.STRING,
+        nationality: Sequelize.STRING,
         birth_city: Sequelize.STRING,
         birth_state: Sequelize.STRING,
         sex: Sequelize.STRING(1),
