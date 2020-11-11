@@ -1,8 +1,7 @@
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=bugs)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
-[![Build Status](https://travis-ci.org/mecassauro/covinfo-backend.svg?branch=master)](https://travis-ci.org/mecassauro/covinfo-backend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=simaps-ubs_simaps-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=simaps-ubs_simaps-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=simaps-ubs_simaps-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
+[![Build Status](https://travis-ci.org/simaps-ubs/simaps-backend.svg?branch=master)](https://travis-ci.org/simaps-ubs/simaps-backend)
 
 # SiMAPS Back-end
 
@@ -53,7 +52,7 @@ Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost:3333]()
 
 ## Análise estática do código
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=mecassauro_RADAR-backend)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
 
  ## Como contribuir com o projeto?
 
