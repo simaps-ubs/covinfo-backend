@@ -4,13 +4,13 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mecassauro_covinfo-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mecassauro_covinfo-backend)
 [![Build Status](https://travis-ci.org/mecassauro/covinfo-backend.svg?branch=master)](https://travis-ci.org/mecassauro/covinfo-backend)
 
-# Covinfo Back-end
+# SiMAPS Back-end
 
 <p align="center">
   <img src="./img/logo.svg" alt="logo">
 </p>
 
-O Back-end do projeto **Covinfo** é a camada que recebe as requisições do front-end, faz validações de regras de negócio e se integra diretamente ao banco de dados PostgreSql.
+O Back-end do projeto **SiMAPS** é a camada que recebe as requisições do front-end, faz validações de regras de negócio e se integra diretamente ao banco de dados PostgreSql.
 
 ## Tecnologias utilizadas
 
