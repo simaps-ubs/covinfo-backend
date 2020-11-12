@@ -110,6 +110,7 @@ dados/
 
 .idea
 
-# env
+
 .env
 .env.test
+/coverage

@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { addHours, isBefore } from 'date-fns';
+import { addHours } from 'date-fns';
 
 import User from '../models/User';
 import Login from '../models/Login';
@@ -14,12 +14,17 @@ class UserController {
       name: Yup.string().required(),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
+      type: Yup.mixed().oneOf([
+        'HEALTH_PROFESSIONAL',
+        'COMMUNITY_PERSON',
+        'DEPENDENT',
+      ]),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
-    const { name, email, password } = req.body;
+    const { name, email, password, type } = req.body;
 
     const emailExists = await Login.findOne({
       where: { email },
@@ -29,7 +34,7 @@ class UserController {
       return res.status(400).json({ error: 'Email already exists' });
     }
 
-    const { id, user_type } = await User.create({ name });
+    const { id, user_type } = await User.create({ name, type });
 
     await Login.create({
       email,
@@ -94,7 +99,7 @@ class UserController {
       confirmPassword: Yup.string()
         .required()
         .when('password', (password, field) =>
-          password ? field.required().oneOf([Yup.ref('password')]) : field
+          password ? field.required().oneOf([Yup.ref('password')]) : field,
         ),
     });
 
