@@ -11,6 +11,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      question: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
     });
   },
 
