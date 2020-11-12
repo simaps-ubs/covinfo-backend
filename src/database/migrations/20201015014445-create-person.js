@@ -27,7 +27,7 @@ module.exports = {
         allowNull: true,
       },
       document_number: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
@@ -35,7 +35,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      nacionality: {
+      nationality: {
         type: Sequelize.STRING,
         allowNull: false,
       },

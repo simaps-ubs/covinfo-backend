@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
       },
       zip_code: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       state: {

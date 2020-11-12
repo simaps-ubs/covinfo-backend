@@ -14,9 +14,9 @@ class FormController {
 
     const schema = Yup.object().shape({
       // person
-      document_number: Yup.number().required(),
+      document_number: Yup.string().required(),
       birth_date: Yup.date().required(),
-      nacionality: Yup.string().required(),
+      nationality: Yup.string().required(),
       birth_city: Yup.string().required(),
       birth_state: Yup.string().required(),
       sex: Yup.string().required(),
@@ -26,7 +26,7 @@ class FormController {
       quantity_per_home: Yup.number().required(),
 
       // address
-      zip_code: Yup.number().required(),
+      zip_code: Yup.string().required(),
       state: Yup.string().required(),
       city: Yup.string().required(),
       street: Yup.string().required(),
@@ -36,8 +36,8 @@ class FormController {
       lng: Yup.string().required(),
 
       // phone
-      phone_number: Yup.number().required(),
-      phone_code: Yup.number().required(),
+      phone_number: Yup.string().required(),
+      phone_code: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -69,7 +69,7 @@ class FormController {
       user_auto_id: null,
       document_number: form.document_number,
       birth_date: form.birth_date,
-      nacionality: form.nacionality,
+      nationality: form.nationality,
       birth_city: form.birth_city,
       birth_state: form.birth_state,
       sex: form.sex,
@@ -108,9 +108,9 @@ class FormController {
       name: Yup.string().required(),
 
       // person
-      document_number: Yup.number().required(),
+      document_number: Yup.string().required(),
       birth_date: Yup.date().required(),
-      nacionality: Yup.string().required(),
+      nationality: Yup.string().required(),
       birth_city: Yup.string().required(),
       birth_state: Yup.string().required(),
       sex: Yup.string().required(),
@@ -119,8 +119,8 @@ class FormController {
       father_name: Yup.string().required(),
 
       // phone
-      phone_number: Yup.number().required(),
-      phone_code: Yup.number().required(),
+      phone_number: Yup.string().required(),
+      phone_code: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -157,7 +157,7 @@ class FormController {
       user_auto_id: provider_user_id,
       document_number: form.document_number,
       birth_date: form.birth_date,
-      nacionality: form.nacionality,
+      nationality: form.nationality,
       birth_city: form.birth_city,
       birth_state: form.birth_state,
       sex: form.sex,
@@ -231,7 +231,7 @@ class FormController {
         'id',
         'document_number',
         'birth_date',
-        'nacionality',
+        'nationality',
         'birth_city',
         'birth_state',
         'sex',
@@ -285,7 +285,7 @@ class FormController {
         'id',
         'document_number',
         'birth_date',
-        'nacionality',
+        'nationality',
         'birth_city',
         'birth_state',
         'sex',

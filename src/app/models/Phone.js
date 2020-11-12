@@ -4,8 +4,8 @@ class Phone extends Model {
   static init(sequelize) {
     super.init(
       {
-        phone_number: Sequelize.BIGINT,
-        phone_code: Sequelize.INTEGER,
+        phone_number: Sequelize.STRING,
+        phone_code: Sequelize.STRING,
       },
       {
         sequelize,
