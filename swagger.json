@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3333",
+  "host": "api.simaps.com.br:3333",
   "basePath": "/",
   "tags": [
     {
