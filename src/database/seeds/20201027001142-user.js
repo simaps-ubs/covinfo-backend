@@ -5,31 +5,31 @@ module.exports = {
       [
         {
           name: 'Ronaldo de Asis',
-          user_type: 'pessoa',
+          user_type: 'COMMUNITY_PERSON',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           name: 'Raimundo Cardoso Santos',
-          user_type: 'pessoa',
+          user_type: 'COMMUNITY_PERSON',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           name: 'Geneci Figueroa',
-          user_type: 'pessoa',
+          user_type: 'COMMUNITY_PERSON',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           name: 'Ribery Machado',
-          user_type: 'pessoa',
+          user_type: 'COMMUNITY_PERSON',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           name: 'Murilo Roberto',
-          user_type: 'pessoa',
+          user_type: 'COMMUNITY_PERSON',
           created_at: new Date(),
           updated_at: new Date(),
         },
