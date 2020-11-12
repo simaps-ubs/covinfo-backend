@@ -45,7 +45,7 @@ class UserController {
     return res.json({
       id,
       name,
-      user_type,
+      type: user_type,
       email,
     });
   }

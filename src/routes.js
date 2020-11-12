@@ -26,7 +26,7 @@ routes.get('/forms/:user_id', FormController.getUserForm);
 routes.get('/forms/dependents/:user_id', FormController.getUserDependentsForm);
 
 // Auth Routes
-routes.use(authMiddleware);
+// routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 

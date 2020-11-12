@@ -1,0 +1,304 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SiMAPS API",
+    "description": "API for SiMAPS",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3333",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/UserForCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserForResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/UserForUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserForUpdateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/forgot-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Request reset password in system",
+        "parameters": [
+          {
+            "name": "forgot_password",
+            "in": "body",
+            "description": "Email to reset pass",
+            "schema": {
+              "$ref": "#/definitions/EmailForgotPass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/reset-password": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "integer"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "description": "Password definition",
+            "schema": {
+              "$ref": "#/definitions/PasswordDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password has been successfully reset"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserForCreate": {
+      "required": [
+        "name",
+        "email",
+        "password",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "integer",
+          "example": "Joao da Rosa"
+        },
+        "email": {
+          "type": "string",
+          "example": "joao@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "joao123456"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "HEALTH_PROFESSIONAL",
+            "COMMUNITY_PERSON",
+            "DEPENDENT"
+          ]
+        }
+      }
+    },
+    "UserForUpdate": {
+      "required": [
+        "name",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "name": {
+          "type": "integer",
+          "example": "Joao da Rosa"
+        },
+        "email": {
+          "type": "string",
+          "example": "joao@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "joao123456"
+        }
+      }
+    },
+    "UserForResponse": {
+      "required": [
+        "id",
+        "name",
+        "email",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "integer",
+          "example": "Joao da Rosa"
+        },
+        "email": {
+          "type": "string",
+          "example": "joao@gmail.com"
+        },
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "HEALTH_PROFESSIONAL",
+            "COMMUNITY_PERSON",
+            "DEPENDENT"
+          ]
+        }
+      }
+    },
+    "UserForUpdateResponse": {
+      "required": [
+        "id",
+        "name",
+        "email",
+        "image_name",
+        "image_url"
+      ],
+      "properties": {
+        "name": {
+          "type": "integer",
+          "example": "Joao da Rosa"
+        },
+        "email": {
+          "type": "string",
+          "example": "joao@gmail.com"
+        },
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "image_name": {
+          "type": "string",
+          "example": "foto do joao"
+        },
+        "image_url": {
+          "type": "string",
+          "example": "https://amazon.s3.com/dfghjk"
+        }
+      }
+    },
+    "EmailForgotPass": {
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "joao@gmail.com"
+        }
+      }
+    },
+    "LoginResponse": {
+      "required": [
+        "user_id",
+        "email",
+        "user"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "example": "joao@gmail.com"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Joao da Rosa"
+            }
+          }
+        }
+      }
+    },
+    "PasswordDefinition": {
+      "required": [
+        "password",
+        "confirmPassword"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "example": "joao123456"
+        },
+        "confirmPassword": {
+          "type": "string",
+          "example": "joao@789"
+        }
+      }
+    }
+  }
+}
