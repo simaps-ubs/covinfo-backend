@@ -99,7 +99,7 @@ class UserController {
       confirmPassword: Yup.string()
         .required()
         .when('password', (password, field) =>
-          password ? field.required().oneOf([Yup.ref('password')]) : field,
+          password ? field.required().oneOf([Yup.ref('password')]) : field
         ),
     });
 
@@ -114,6 +114,10 @@ class UserController {
     await login.update(req.body);
 
     return res.json({ sucess: 'Password has been successfully reset' });
+  }
+
+  async update(req, res) {
+    return res.json({ ok: true });
   }
 }
 
