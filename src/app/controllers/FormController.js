@@ -1,11 +1,9 @@
-import * as Yup from 'yup';
 import StoreProviderPersonService from '../services/StoreProviderPersonService';
 import StoreDependentService from '../services/StoreDependentService';
 import GetUserDependentsFormService from '../services/GetUserDependentsFormService';
 import GetUserFormService from '../services/GetUserFormService';
 import validateProviderPerson from '../../validations/ProviderPersonValidation';
 import validateDependent from '../../validations/DependentValidation';
-import AppError from '../../errors/AppError';
 
 class FormController {
   async storeProviderPerson(req, res) {
