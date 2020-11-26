@@ -24,9 +24,15 @@ class Login extends Model {
       }
     );
 
-    this.addHook('beforeSave', async (user) => {
-      if (user.password) {
-        user.encrypted_pass = await bcrypt.hash(user.password, 8);
+    this.addHook('beforeSave', async (login) => {
+      if (login.password) {
+        login.encrypted_pass = await bcrypt.hash(login.password, 8);
+      }
+    });
+
+    this.addHook('beforeUpdate', async (login) => {
+      if (login.password) {
+        login.encrypted_pass = await bcrypt.hash(login.password, 8);
       }
     });
 
