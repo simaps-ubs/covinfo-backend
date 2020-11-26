@@ -11,7 +11,7 @@ class LoginService {
         {
           model: User,
           as: 'user',
-          attributes: ['name'],
+          attributes: ['name', 'user_type'],
         },
       ],
     });
