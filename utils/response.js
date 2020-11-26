@@ -1,9 +1,9 @@
 module.exports = {
-  responseJson(success = false, message = '', errors = null, data = []) {
+  responseJson(success = false, message = '', error = null, data = []) {
     const res = {
       success,
       message,
-      errors: `${errors}`,
+      error: `${error}`,
       data,
     };
     return res;
