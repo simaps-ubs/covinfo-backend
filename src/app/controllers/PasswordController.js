@@ -3,25 +3,22 @@ import ProviderPasswordValidation from '../../validations/ProviderPasswordValida
 
 class PasswordController {
 
-  passwordService = new PasswordService();
-  providerPasswordValidation = new ProviderPasswordValidation();
-
   async forgotPassword(req, res) {
-    await this.providerPasswordValidation.validateForgotPassword(req);
+    await new ProviderPasswordValidation().validateForgotPassword(req);
 
-    const login = this.passwordService.forgotPassword(req);
+    const login = await new PasswordService().forgotPassword(req).catch(err => res.status(err.statusCode).json({ message: err.message }));
     return res
       .status(200)
       .json({login});
   }
 
   async resetPassword(req, res) {
-    await this.providerPasswordValidation.validateForgotPassword(req);
+    await new ProviderPasswordValidation().validateForgotPassword(req).catch(err => res.status(err.statusCode).json({ message: err.message }));
 
-    await this.passwordService.resetPassword(req);
+    await new PasswordService().resetPassword(req).catch(err => res.status(err.statusCode).json({ message: err.message }));
     return res
       .status(200)
-      .json({ sucess: 'Senha alterada com sucesso.' });
+      .json({ message: 'Senha alterada com sucesso.' });
   }
 
 }

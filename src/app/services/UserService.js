@@ -4,13 +4,11 @@ import LoginService from './LoginService';
 
 class UserService {
 
-  loginService = new LoginService();
-
   async create(form) {
 
     const { name, email, password, type } = form.body;
 
-    const login = await this.loginService.findOne(email);
+    const login = await new LoginService().findOne(email);
 
     if (login) {
       throw new AppError('E-mail já cadastrado.', 400);
@@ -18,7 +16,7 @@ class UserService {
 
     const { id } = await User.create({ name, type });
 
-    await this.loginService.create({ email, password, id });
+    await new LoginService().create({ email, password, user_id: id });
 
     return { id, name, type, email };
   }
@@ -30,14 +28,14 @@ class UserService {
     const user = this.findByPk(form.userId);
 
     if (email && email !== user.email) {
-      const userExist = await this.loginService.findOne(email);
+      const userExist = await new LoginService().findOne(email);
 
       if (userExist) {
         throw new AppError('E-mail já cadastrado.', 400);
       }
     }
 
-    const login = this.loginService.findByUserId(form.userId);
+    const login = new LoginService().findByUserId(form.userId);
 
     if (oldPassword && !(await login.checkPassword(oldPassword))) {
       throw new AppError('Senha incorreta.', 401);
@@ -50,7 +48,7 @@ class UserService {
   }
 
   async findByPk(id) {
-    return await User.findByPk(id)
+    return await User.findByPk(id);
   }
 
 }

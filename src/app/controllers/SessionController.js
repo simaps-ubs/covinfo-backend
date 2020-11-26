@@ -3,13 +3,10 @@ import ProviderSessionValidation from '../../validations/ProviderSessionValidati
 
 class SessionController {
 
-  sessionService = new SessionService();
-  providerSessionValidation = new ProviderSessionValidation();
-
   async store(req, res) {
-    await this.providerSessionValidation.validateSession(req.body);
+    await new ProviderSessionValidation().validateSession(req.body);
 
-    const token = this.sessionService.create(req);
+    const token = await new SessionService().create(req).catch(err => res.status(err.statusCode).json({ message: err.message }));
     return res
       .status(200)
       .json({ token });

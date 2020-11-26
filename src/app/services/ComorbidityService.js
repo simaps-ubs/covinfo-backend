@@ -3,7 +3,7 @@ import Comorbidity from '../models/Comorbidity';
 class ComorbidityService {
 
   async findAll() {
-    return await Comorbidity.findAll({
+    return Comorbidity.findAll({
       attributes: ['id', 'comorbidity_description', 'question'],
     });
   }

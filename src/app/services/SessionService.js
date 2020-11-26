@@ -5,13 +5,11 @@ import jwt from 'jsonwebtoken';
 
 class SessionService {
 
-  loginService = new LoginService();
-
   async create(form) {
 
     const { email, password } = form.body;
 
-    const login = await this.loginService.findOne(email);
+    const login = await new LoginService().findOne(email);
 
     if (!login || !(await login.checkPassword(password))) {
       throw new AppError('Usuário ou senha inválidos!', 401);

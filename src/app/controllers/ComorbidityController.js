@@ -2,10 +2,8 @@ import ComorbidityService from '../services/ComorbidityService';
 
 class ComorbidityController {
 
-  comorbidityService = new ComorbidityService();
-
   async index(req, res) {
-    const comorbidities = this.comorbidityService.findAll();
+    const comorbidities = await new ComorbidityService().findAll();
 
     return res
       .status(200)

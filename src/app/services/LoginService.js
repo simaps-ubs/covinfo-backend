@@ -3,8 +3,8 @@ import User from '../models/User';
 
 class LoginService {
 
-  async findOne(email) {
-    return await Login.findOne({
+   async findOne(email) {
+    return Login.findOne({
       where: { email },
       attributes: ['user_id', 'email'],
       include: [
