@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import { where } from 'sequelize';
 import Person from '../models/Person';
 import Comorbidity from '../models/Comorbidity';
 import PersonComorbidity from '../models/PersonComorbidity';
@@ -7,6 +6,8 @@ import Phone from '../models/Phone';
 import Address from '../models/Address';
 import User from '../models/User';
 import AppError from '../../errors/AppError';
+
+import identification from '../../utils/ubs-identification';
 
 class FormController {
   async storeProviderPerson(req, res) {
@@ -64,8 +65,11 @@ class FormController {
       lng: form.lng,
     });
 
+    const ubs_id = identification({ lat: form.lat, lng: form.lng });
+
     const { id } = await Person.create({
       user_id,
+      ubs_id,
       user_auto_id: null,
       document_number: form.document_number,
       birth_date: form.birth_date,

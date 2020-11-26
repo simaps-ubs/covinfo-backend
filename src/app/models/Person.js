@@ -29,6 +29,8 @@ class Person extends Model {
     // this.belongsTo(models.User, { foreignKey: 'user_auto_id' });
     this.belongsTo(models.Address, { foreignKey: 'address_id' });
 
+    this.belongsTo(models.Ubs, { foreignKey: 'ubs_id' });
+
     this.hasOne(models.Phone);
 
     this.belongsToMany(models.Comorbidity, {

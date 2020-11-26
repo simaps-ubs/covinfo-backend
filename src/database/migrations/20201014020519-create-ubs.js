@@ -10,7 +10,7 @@ module.exports = {
       ubs_identification: {
         type: Sequelize.BIGINT,
         allowNull: false,
-        unique: true,
+        unique: false,
       },
       city: {
         type: Sequelize.STRING,
@@ -19,7 +19,6 @@ module.exports = {
       },
     });
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('ubs');
   },

@@ -14,6 +14,13 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
+      ubs_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'ubs', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
+      },
       address_id: {
         type: Sequelize.INTEGER,
         references: { model: 'addresses', key: 'id' },

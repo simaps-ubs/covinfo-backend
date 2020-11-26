@@ -24,8 +24,8 @@ module.exports = {
           question: 'Possui hipertensão arterial?',
         },
         {
-          comorbidity_description: 'AVC/Derrame',
-          question: 'Já sofreu um AVC/Derrma?',
+          comorbidity_description: 'Obesidade',
+          question: 'Possui obesidade?',
         },
         {
           comorbidity_description: 'Infarto',

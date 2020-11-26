@@ -1,6 +1,5 @@
 import express from 'express';
 import 'express-async-errors';
-import cors from 'cors';
 import routes from './routes/index';
 import AppError from './errors/AppError';
 
@@ -9,7 +8,6 @@ import './database';
 class App {
   constructor() {
     this.server = express();
-    this.server.use(cors());
     this.middlewares();
     this.routes();
     this.errors();
