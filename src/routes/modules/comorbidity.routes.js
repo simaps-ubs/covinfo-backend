@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ComorbidityController from '../app/controllers/ComorbidityController';
+import ComorbidityController from '../../app/controllers/ComorbidityController';
 
 const comorbidityRouter = Router();
 
