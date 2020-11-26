@@ -1,52 +1,14 @@
 import * as Yup from 'yup';
-import AppError from '../../errors/AppError';
 import StoreProviderPersonService from '../services/StoreProviderPersonService';
 import StoreDependentService from '../services/StoreDependentService';
 import GetUserDependentsFormService from '../services/GetUserDependentsFormService';
 import GetUserFormService from '../services/GetUserFormService';
+import validateProviderPerson from '../../validations/ProviderPersonValidation';
+import AppError from '../../errors/AppError';
 
 class FormController {
   async storeProviderPerson(req, res) {
-    const schema = Yup.object().shape({
-      // person
-      document_number: Yup.string().required(),
-      birth_date: Yup.date().required(),
-      nationality: Yup.string().required(),
-      birth_city: Yup.string().required(),
-      birth_state: Yup.string().required(),
-      sex: Yup.string().required(),
-      breed: Yup.string().required(),
-      mother_name: Yup.string().required(),
-      father_name: Yup.string().required(),
-      quantity_per_home: Yup.number().required(),
-
-      // address
-      zip_code: Yup.string().required(),
-      state: Yup.string().required(),
-      city: Yup.string().required(),
-      street: Yup.string().required(),
-      house_number: Yup.string().required(),
-      home_situation: Yup.string().required(),
-      lat: Yup.string().required(),
-      lng: Yup.string().required(),
-
-      // phone
-      phone_number: Yup.string().required(),
-      phone_code: Yup.string().required(),
-    });
-
-    await schema.validate(req.body, {abortEarly: false})
-    .then(
-      (data) => console.log(data)
-    ).catch(err => {
-      console.log(err);
-      console.log(JSON.stringify(err.errors));
-    })
-
-    // console.log(await schema.isValid(req.body).error);
-    if (!(await schema.isValid(req.body))) {
-      throw new AppError('Está faltando algum valor', 400);
-    }
+    await validateProviderPerson(req.body);
 
     const storeProviderService = new StoreProviderPersonService();
     await storeProviderService.execute(req.body);
