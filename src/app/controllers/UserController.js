@@ -9,7 +9,7 @@ class UserController {
   async store(req, res) {
     await this.providerUserValidation.validateUserCreate(req.body);
 
-    const userCreated = await this.userService.create(req);
+    const userCreated = this.userService.create(req);
     return res
       .status(200)
       .json({ userCreated });
@@ -18,7 +18,7 @@ class UserController {
   async update(req, res) {
     await this.providerUserValidation.validateUserUpdate(req.body);
 
-    const userUpdated = await this.userService.update(req);
+    const userUpdated = this.userService.update(req);
     return res
       .status(200)
       .json({ userUpdated });

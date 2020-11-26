@@ -7,10 +7,9 @@ class SessionController {
   providerSessionValidation = new ProviderSessionValidation();
 
   async store(req, res) {
-
     await this.providerSessionValidation.validateSession(req.body);
-    const token = await this.sessionService.create(req);
 
+    const token = this.sessionService.create(req);
     return res
       .status(200)
       .json({ token });
