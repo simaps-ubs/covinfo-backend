@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { addHours } from 'date-fns';
+import validateUserCreate from '../../validations/ProviderUserValidation';
 
 import User from '../models/User';
 import Login from '../models/Login';
@@ -7,47 +8,19 @@ import Notification from '../models/Notification';
 
 import ResetPassword from '../jobs/ResetPassword';
 import Queue from '../../lib/Queue';
+import UserService from '../services/UserService';
 
 class UserController {
+
   async store(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string().email().required(),
-      password: Yup.string().required().min(6),
-      type: Yup.mixed().oneOf([
-        'HEALTH_PROFESSIONAL',
-        'COMMUNITY_PERSON',
-        'DEPENDENT',
-      ]),
-    });
+    await validateUserCreate(req.body);
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-    const { name, email, password, type } = req.body;
+    const userService = new UserService();
+    await userService.create(req);
 
-    const emailExists = await Login.findOne({
-      where: { email },
-    });
-
-    if (emailExists) {
-      return res.status(400).json({ error: 'Email already exists' });
-    }
-
-    const { id, user_type } = await User.create({ name, type });
-
-    await Login.create({
-      email,
-      password,
-      user_id: id,
-    });
-
-    return res.json({
-      id,
-      name,
-      user_type,
-      email,
-    });
+    return res
+      .status(200)
+      .json({ success: true, message: 'Usuário cadastrado com sucesso' });
   }
 
   async forgotPassword(req, res) {
@@ -99,7 +72,7 @@ class UserController {
       confirmPassword: Yup.string()
         .required()
         .when('password', (password, field) =>
-          password ? field.required().oneOf([Yup.ref('password')]) : field
+          password ? field.required().oneOf([Yup.ref('password')]) : field,
         ),
     });
 
@@ -123,10 +96,10 @@ class UserController {
       password: Yup.string()
         .min(6)
         .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
+          oldPassword ? field.required() : field,
         ),
       confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
+        password ? field.required().oneOf([Yup.ref('password')]) : field,
       ),
     });
 

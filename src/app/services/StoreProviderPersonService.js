@@ -1,10 +1,8 @@
 import AppError from '../../errors/AppError';
-import { where } from 'sequelize';
 import Person from '../models/Person';
 import PersonComorbidity from '../models/PersonComorbidity';
 import Phone from '../models/Phone';
 import Address from '../models/Address';
-import { number } from 'yup';
 
 class StoreProviderPersonService {
   async execute(form) {
