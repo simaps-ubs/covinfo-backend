@@ -52,15 +52,15 @@ class FormController {
     });
   }
 
-  async getUserDependentsForm(req, res) {z
+  async getUserDependentsForm(req, res) {
     const getUserDependentsFormService = new GetUserDependentsFormService();
-    const userForm = await getUserDependentsFormService.execute(req.params);
+    const userForm = await getUserDependentsFormService.execute(req.body);
     return res.status(200).json(userForm);
   }
 
   async getUserForm(req, res) {
     const getUserFormService = new GetUserFormService();
-    const userForm = await getUserFormService.execute(req.params);
+    const userForm = await getUserFormService.execute(req.body);
     return res.status(200).json(userForm);
   }
 }
