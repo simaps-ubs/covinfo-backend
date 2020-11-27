@@ -14,7 +14,7 @@ class UserController {
       name: Yup.string().required(),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
-      type: Yup.mixed().oneOf([
+      user_type: Yup.mixed().oneOf([
         'HEALTH_PROFESSIONAL',
         'COMMUNITY_PERSON',
         'DEPENDENT',
@@ -24,7 +24,7 @@ class UserController {
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
-    const { name, email, password, type } = req.body;
+    const { name, email, password, user_type } = req.body;
 
     const emailExists = await Login.findOne({
       where: { email },
@@ -33,8 +33,7 @@ class UserController {
     if (emailExists) {
       return res.status(400).json({ error: 'Email already exists' });
     }
-
-    const { id, user_type } = await User.create({ name, type });
+    const { id, user_type: type } = await User.create({ name, user_type, });
 
     await Login.create({
       email,
@@ -45,7 +44,7 @@ class UserController {
     return res.json({
       id,
       name,
-      user_type,
+      user_type: type,
       email,
     });
   }
