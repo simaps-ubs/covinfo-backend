@@ -8,8 +8,6 @@ class ResetPassword {
   async handle({ data }) {
     const { user } = data;
 
-    console.log('queue working');
-
     await Mail.sendMail({
       from: 'Equipe Covinfo <equipe@covinfo.com>',
       to: `${user.name} <${user.email}>`,
@@ -20,7 +18,6 @@ class ResetPassword {
         link: `localhost:3000/reset_password?userId=${user.id}`,
       },
     });
-    console.log('email sent');
   }
 }
 
