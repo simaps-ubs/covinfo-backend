@@ -26,13 +26,13 @@ module.exports = {
         references: { model: 'users', key: 'id' },
         allowNull: true,
       },
-      ubs_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'ubs', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false,
-      },
+      // ubs_id: {
+      //   type: Sequelize.INTEGER,
+      //   references: { model: 'ubs', key: 'id' },
+      //   onUpdate: 'CASCADE',
+      //   onDelete: 'CASCADE',
+      //   allowNull: false,
+      // },
       document_number: {
         type: Sequelize.STRING,
         allowNull: false,
