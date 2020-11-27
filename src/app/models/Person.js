@@ -26,7 +26,7 @@ class Person extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
-    // this.belongsTo(models.User, { foreignKey: 'user_auto_id' });
+
     this.belongsTo(models.Address, { foreignKey: 'address_id' });
 
     this.hasOne(models.Phone);

@@ -6,7 +6,6 @@ import Address from '../models/Address';
 
 class StoreProviderPersonService {
   async execute(form) {
-    console.log(typeof form.document_number);
     const documentExists = await Person.findOne({
       where: { document_number: form.document_number },
     });
@@ -14,8 +13,6 @@ class StoreProviderPersonService {
     if (documentExists) {
       throw new AppError('Este documento ja foi registrado. Tente outro.', 400);
     }
-
-    console.log("PASSOU 1");
 
     const address = await Address.create({
       zip_code: form.zip_code,
@@ -27,8 +24,6 @@ class StoreProviderPersonService {
       lat: form.lat,
       lng: form.lng,
     });
-
-    console.log("PASSOU 2");
 
     const { id } = await Person.create({
       user_id: form.user_id,
@@ -45,8 +40,6 @@ class StoreProviderPersonService {
       quantity_per_home: form.quantity_per_home,
       address_id: address.id,
     });
-
-    console.log("PASSOU 3");
 
     await Phone.create({
       person_id: id,
