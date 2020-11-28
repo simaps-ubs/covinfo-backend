@@ -1,6 +1,6 @@
 module.exports = {
-  up: async (QueryInterface) => {
-    await QueryInterface.bulkInsert(
+  up: async (queryInterface) => {
+    await queryInterface.bulkInsert(
       'users',
       [
         {
@@ -38,5 +38,7 @@ module.exports = {
     );
   },
 
-  down: () => {},
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete('users', null, {});
+  },
 };

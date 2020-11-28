@@ -24,7 +24,7 @@ class StoreDependentService {
 
     const user_dependent = await User.create({
       name: form.name,
-      user_type: 'cidadao',
+      user_type: 'DEPENDENT',
     });
 
     const { id } = await Person.create({
