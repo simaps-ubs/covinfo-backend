@@ -1,13 +1,20 @@
 dist: trusty
-language: node_js
-node_js: 12.18.4
+language:
+  - node_js
+  - python
 
-#services:
-#  - docker
+node_js:
+  - '12.18.4'
+
+python:
+  - '3.6'
+
+services:
+  - docker
 
 addons:
   sonarcloud:
-    organization: "mecassauro"
+    organization: 'mecassauro'
     token: ${SONAR_TOKEN}
 
 install:
@@ -17,23 +24,36 @@ cache:
   directories:
     - node_modules
 
+before_install:
+  - yarn install
+  - pip install requests
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 stages:
-  - Install
   - Test
   - Quality gate
+  - Push docker image prod
 #  - Deploy
 
 jobs:
   include:
-    - stage: Install
-      script:
-        - yarn install
     - stage: Test
       script:
         - yarn run test --passWithNoTests --watchAll=false --coverage
+
     - stage: Quality gate
       script:
         - sonar-scanner
+
+    - stage: 'Push docker image prod'
+      name: 'Push docker image prod'
+      if: (NOT type IN (pull_request)) AND branch = master
+      script:
+        # build docker image
+        - docker build -t ${DOCKER_HUB_REPOSITORY}/${SERVICE_IMAGE}:${TAG_IMAGE} .
+
+        # push image to Docker Hub
+        - docker push ${DOCKER_HUB_REPOSITORY}/${SERVICE_IAMGE}:${TAG_IMAGE}
 #    - stage: Deploy
 #      if: branch = master
 #      script:
