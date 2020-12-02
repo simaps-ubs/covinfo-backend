@@ -30,6 +30,7 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 stages:
+  - Build
   - Test
   - Quality gate
   - Push docker image prod
@@ -37,6 +38,11 @@ stages:
 
 jobs:
   include:
+    - stage: Build
+      name: Build
+      script:
+        - yarn build
+
     - stage: Test
       script:
         - yarn run test --passWithNoTests --watchAll=false --coverage
