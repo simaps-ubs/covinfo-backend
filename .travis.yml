@@ -25,8 +25,9 @@ cache:
     - node_modules
 
 before_install:
-  - yarn install
   - pip install requests
+  - yarn install
+  # Docker Hub login
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 stages:
@@ -34,7 +35,7 @@ stages:
   - Test
   - Quality gate
   - Push docker image prod
-#  - Deploy
+  - Upgrade rancher service
 
 jobs:
   include:
@@ -56,13 +57,12 @@ jobs:
       if: (NOT type IN (pull_request)) AND branch = master
       script:
         # build docker image
-        - docker build -t ${DOCKER_HUB_REPOSITORY}/${SERVICE_IMAGE}:${TAG_IMAGE} .
+        - docker build -t "$DOCKER_USERNAME"/"$SERVICE_IMAGE":"$TAG_NAME" .
 
         # push image to Docker Hub
-        - docker push ${DOCKER_HUB_REPOSITORY}/${SERVICE_IAMGE}:${TAG_IMAGE}
-#    - stage: Deploy
-#      if: branch = master
-#      script:
-#        - docker build -t radar-frontend .
-#        - docker login
-#        - docker push
+        - docker push "$DOCKER_USERNAME"/"$SERVICE_IMAGE":"$TAG_NAME"
+
+    - stage: 'Upgrade rancher service'
+      name: 'Upgrade rancher service'
+      if: (NOT type IN (pull_request)) AND (branch = master || branch = devel)
+      script: python ./scripts/upgrade_service.py
