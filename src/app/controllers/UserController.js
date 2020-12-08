@@ -4,7 +4,9 @@ import { next } from 'sucrase/dist/parser/tokenizer';
 
 class UserController {
   async store(req, res) {
+    console.log('aqui 1', req.body);
     await new ProviderUserValidation().validateUserCreate(req.body);
+    console.log('aqui 2', req.body);
 
     await new UserService()
       .create(req)
