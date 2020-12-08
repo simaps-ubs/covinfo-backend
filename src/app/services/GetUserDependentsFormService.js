@@ -65,7 +65,7 @@ class GetUserDependentsFormService {
     } catch (error) {
       throw new AppError(
         'OPS! Erro ao tentar buscar informações de dependente.',
-        400
+        500
       );
     }
   }
