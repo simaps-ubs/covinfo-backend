@@ -19,9 +19,9 @@ services:
   redis:
     container_name: redis_queue
     image: redis
-    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    command: ['redis-server', '--bind', 'redis', '--port', '6379']
     ports:
-      - "6379:6379"
+      - '6379:6379'
     networks:
       - network-queue
 
@@ -31,7 +31,7 @@ services:
     depends_on:
       - covinfo_db_service
       - redis
-    command: bash -c "yarn sequelize db:migrate && yarn sequelize db:seed:all && yarn start"
+    command: bash -c "yarn sequelize db:migrate &&  yarn sequelize db:seed:undo:all && yarn sequelize db:seed:all && yarn start"
     build: ./
     volumes:
       - .:/app

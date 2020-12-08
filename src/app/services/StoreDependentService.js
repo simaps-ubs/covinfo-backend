@@ -22,11 +22,10 @@ class StoreDependentService {
       throw new AppError('Usuário responsável não encontrado', 400);
     }
 
-    try {
-      const user_dependent = await User.create({
-        name: form.name,
-        user_type: 'cidadao',
-      });
+    const user_dependent = await User.create({
+      name: form.name,
+      user_type: 'DEPENDENT',
+    });
 
       const { id } = await Person.create({
         user_id: user_dependent.id,

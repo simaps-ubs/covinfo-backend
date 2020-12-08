@@ -24,10 +24,6 @@ module.exports = {
           question: 'Possui hipertensão arterial?',
         },
         {
-          comorbidity_description: 'AVC/Derrame',
-          question: 'Já sofreu um AVC/Derrma?',
-        },
-        {
           comorbidity_description: 'Infarto',
           question: 'Já sofreu um infarto?',
         },
@@ -59,10 +55,16 @@ module.exports = {
           comorbidity_description: 'Acamada',
           question: 'Está acamada?',
         },
+        {
+          comorbidity_description: 'Obesidade',
+          question: 'Possui obesidade?',
+        },
       ],
       {}
     );
   },
 
-  down: () => {},
+  down: async (queryInterface) => {
+    await queryInterface.bulkDelete('comorbidities', null, {});
+  },
 };
