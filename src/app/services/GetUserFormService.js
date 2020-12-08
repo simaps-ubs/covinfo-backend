@@ -61,7 +61,7 @@ class GetUserFormService {
     } catch (error) {
       throw new AppError(
         'OPS! Erro ao tentar buscar informações do usuario.',
-        400
+        500
       );
     }
   }

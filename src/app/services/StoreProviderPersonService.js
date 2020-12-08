@@ -59,7 +59,7 @@ class StoreProviderPersonService {
     } catch (error) {
       throw new AppError(
         'OPS! Erro ao tentar criar formulario de responsável.',
-        400
+        500
       );
     }
   }
