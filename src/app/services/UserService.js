@@ -3,10 +3,8 @@ import User from '../models/User';
 import LoginService from './LoginService';
 
 class UserService {
-
   async create(form) {
-
-    const { name, email, password, type } = form.body;
+    const { name, email, password, user_type } = form.body;
 
     const login = await new LoginService().findOne(email);
 
@@ -14,15 +12,14 @@ class UserService {
       throw new AppError('E-mail já cadastrado.', 400);
     }
 
-    const { id } = await User.create({ name, type });
+    const { id } = await User.create({ name, user_type });
 
     await new LoginService().create({ email, password, user_id: id });
 
-    return { id, name, type, email };
+    return { id, name, user_type, email };
   }
 
   async update(form) {
-
     const { email, oldPassword } = form.body;
 
     const user = this.findByPk(form.userId);
@@ -50,7 +47,6 @@ class UserService {
   async findByPk(id) {
     return await User.findByPk(id);
   }
-
 }
 
 export default UserService;
