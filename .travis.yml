@@ -17,9 +17,6 @@ addons:
     organization: 'mecassauro'
     token: ${SONAR_TOKEN}
 
-install:
-  - yarn
-
 cache:
   directories:
     - node_modules
@@ -46,7 +43,7 @@ jobs:
 
     - stage: Test
       script:
-        - yarn run test --passWithNoTests --watchAll=false --coverage
+        - yarn run test --coverage
 
     - stage: Quality gate
       script:
