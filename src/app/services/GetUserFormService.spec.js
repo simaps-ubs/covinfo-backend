@@ -1,7 +1,7 @@
 import GetUserFormService from '../services/GetUserFormService';
 import Database from '../../database';
 
-describe('AuthentiacteUser', () => {
+describe('GetUserFormService', () => {
     const db = Database;
     let user;
     let address;
@@ -39,7 +39,7 @@ describe('AuthentiacteUser', () => {
       })
     });
   
-    it('should be able to get user', async () => {
+    it('should be able to get user form', async () => {
       const getUserFormService = new GetUserFormService();
       const form = {'user_id': user.id};
       const userForm = await getUserFormService.execute(form);
@@ -47,7 +47,7 @@ describe('AuthentiacteUser', () => {
     });
   
 
-    it('should not be able to get user', async () => {
+    it('should not be able to get user form with a non-existent id', async () => {
       const getUserFormService = new GetUserFormService();
       const form = {'user_id': -1};
       const userForm = await getUserFormService.execute(form);
