@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/mecassauro/covinfo-backend#readme",
   "dependencies": {
+    "@types/jest": "^26.0.16",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.3",
     "cors": "^2.8.5",
