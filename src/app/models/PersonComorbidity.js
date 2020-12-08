@@ -1,6 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import Comorbidity from './Comorbidity';
-import Person from './Person';
 
 class PersonComorbidity extends Model {
   static init(sequelize) {
