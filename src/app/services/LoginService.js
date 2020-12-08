@@ -1,12 +1,11 @@
-import Login from '../models/Login'
+import Login from '../models/Login';
 import User from '../models/User';
 
 class LoginService {
-
-   async findOne(email) {
+  async findOne(email) {
     return Login.findOne({
       where: { email },
-      attributes: ['user_id', 'email'],
+      attributes: ['user_id', 'email', 'encrypted_pass'],
       include: [
         {
           model: User,
@@ -27,11 +26,9 @@ class LoginService {
 
   async findByUserId(user_id) {
     return Login.findOne({
-      where: {user_id}
+      where: { user_id },
     });
   }
-
 }
 
 export default LoginService;
-
