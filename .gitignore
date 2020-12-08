@@ -114,3 +114,4 @@ dados/
 .env
 .env.test
 /coverage
+/dist
