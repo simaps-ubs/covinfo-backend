@@ -7,7 +7,9 @@
     "start": "nodemon src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
     "queue": "nodemon src/queue.js",
-    "test": "jest"
+    "pretest": "DB_DIALECT=sqlite sequelize db:migrate && DB_DIALECT=sqlite sequelize db:seed:undo:all && DB_DIALECT=sqlite sequelize db:seed:all",
+    "test": "DB_DIALECT=sqlite jest --detectOpenHandles --forceExit --silent --coverage",
+    "posttest": "DB_DIALECT=sqlite sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -49,6 +51,7 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
     "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.0",
     "sucrase": "^3.15.0"
   }
 }
