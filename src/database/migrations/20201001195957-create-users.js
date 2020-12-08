@@ -12,9 +12,10 @@ module.exports = {
         allowNull: false,
       },
       user_type: {
-        type: Sequelize.STRING,
-        defaultValue: 'professional',
+        type: Sequelize.ENUM,
+        defaultValue: 'HEALTH_PROFESSIONAL',
         allowNull: false,
+        values: ['HEALTH_PROFESSIONAL', 'COMMUNITY_PERSON', 'DEPENDENT'],
       },
       created_at: {
         type: Sequelize.DATE,

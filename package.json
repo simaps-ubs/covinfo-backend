@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
-    "test": "jest"
+    "queue": "nodemon src/queue.js",
+    "test": "jest",
+    "build": "sucrase ./src -d ./dist --transforms imports"
   },
   "repository": {
     "type": "git",
@@ -20,16 +22,23 @@
   "homepage": "https://github.com/mecassauro/covinfo-backend#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bee-queue": "^1.2.3",
+    "cors": "^2.8.5",
+    "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "jest": "^26.6.3",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.4.14",
+    "nodemailer-express-handlebars": "^4.0.0",
     "pg": "^8.3.3",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.5",
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
+    "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "^2.22.1",
@@ -37,6 +46,6 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
     "sequelize-cli": "^6.2.0",
-    "sucrase": "^3.15.0"
+    "sucrase": "^3.16.0"
   }
 }

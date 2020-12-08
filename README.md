@@ -1,7 +1,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=simaps-ubs_simaps-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=simaps-ubs_simaps-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=simaps-ubs_simaps-backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=simaps-ubs_simaps-backend)
 [![Build Status](https://travis-ci.org/simaps-ubs/simaps-backend.svg?branch=master)](https://travis-ci.org/simaps-ubs/simaps-backend)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # SiMAPS Back-end
 
@@ -36,6 +36,11 @@ Crie uma conexao local do docker na sua máquina para que o docker do front e ba
  docker network create network-api
  ```
 
+Crie uma conexao local do docker na sua máquina para que o docker do redis e backend possam se comunicar:
+ ```
+ docker network create network-queue
+ ```
+
 Crie e inicie os containers dos serviços:
 
  ```
@@ -67,8 +72,3 @@ Acesse a aplicação na porta 3333 do seu `browser`: [http://localhost:3333]()
 <details><summary><b>Políticas de Contribuição</b></summary>
 1. <a href="https://github.com/mecassauro/docs/blob/master/docs/gcs.md">Política de branchs/commits/</a>
 </details>
-
-
-
-
-

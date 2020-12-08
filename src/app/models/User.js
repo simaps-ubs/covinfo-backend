@@ -5,13 +5,16 @@ class User extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        user_type: Sequelize.STRING,
+        user_type: Sequelize.ENUM(
+          'HEALTH_PROFESSIONAL',
+          'COMMUNITY_PERSON',
+          'DEPENDENT'
+        ),
       },
       {
         sequelize,
       }
     );
-
     return this;
   }
 }

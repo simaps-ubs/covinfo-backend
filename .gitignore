@@ -109,3 +109,9 @@ dist
 dados/
 
 .idea
+
+
+.env
+.env.test
+/coverage
+/dist
