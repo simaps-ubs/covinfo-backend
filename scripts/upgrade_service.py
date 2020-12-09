@@ -2,9 +2,9 @@ import os
 import requests
 import json
 import time
-
+import sys
 serviceName = os.environ['RANCHER_SERVICE_NAME']
-newImage = 'docker:'+os.environ['DOCKER_USERNAME']+os.environ['SERVICE_IMAGE']+':'+os.environ['TAG_NAME']
+newImage = 'docker:'+os.environ['DOCKER_USERNAME']+'/'+os.environ['SERVICE_IMAGE']+':'+os.environ['TAG_NAME']
 
 # Find stack based on their name
 r = requests.get(os.environ['RANCHER_URL_SERVICES'],
