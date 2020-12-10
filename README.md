@@ -16,6 +16,7 @@ O Back-end do projeto **SiMAPS** é a camada que recebe as requisições do fron
 1. [Node JS](https://nodejs.org/en/)
 2. [Docker](https://www.docker.com/what-docker)
 3. [PostgreSql](https://www.postgresql.org/)
+4. [Express](https://expressjs.com/pt-br/)
 
 ## Rodando da aplicação
 
