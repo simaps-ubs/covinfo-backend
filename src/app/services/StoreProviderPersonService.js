@@ -26,7 +26,7 @@ class StoreProviderPersonService {
         lng: form.lng,
       });
 
-      console.log(form.pregnant, form.studant, form.deficient,form.interned)
+      console.log(form.pregnant, form.student, form.deficient,form.interned)
 
       const { id } = await Person.create({
         user_id: form.user_id,
@@ -43,7 +43,7 @@ class StoreProviderPersonService {
         quantity_per_home: form.quantity_per_home,
         address_id: address.id,
         pregnant: form.pregnant,
-        studant: form.studant,
+        student: form.student,
         deficient: form.deficient,
         interned: form.interned,
       });
