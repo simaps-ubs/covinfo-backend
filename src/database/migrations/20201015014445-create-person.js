@@ -58,7 +58,7 @@ module.exports = {
         type: Sequelize.STRING(1),
         allowNull: false,
       },
-      studant: {
+      student: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false,
