@@ -1,42 +1,65 @@
 dist: trusty
-language: node_js
-node_js: 12.18.4
+language:
+  - node_js
+  - python
 
-#services:
-#  - docker
+node_js:
+  - '12.18.4'
+
+python:
+  - '3.6'
+
+services:
+  - docker
 
 addons:
   sonarcloud:
-    organization: "mecassauro"
+    organization: 'mecassauro'
     token: ${SONAR_TOKEN}
-
-install:
-  - yarn
 
 cache:
   directories:
     - node_modules
 
+before_install:
+  - pip install requests
+  - yarn install
+  # Docker Hub login
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 stages:
-  - Install
+  - Build
   - Test
   - Quality gate
-#  - Deploy
+  - Push docker image prod
+  - Upgrade rancher service
 
 jobs:
   include:
-    - stage: Install
+    - stage: Build
+      name: Build
       script:
-        - yarn install
+        - yarn build
+
     - stage: Test
       script:
-        - yarn run test --passWithNoTests --watchAll=false --coverage
+        - yarn run test --coverage
+
     - stage: Quality gate
       script:
         - sonar-scanner
-#    - stage: Deploy
-#      if: branch = master
-#      script:
-#        - docker build -t radar-frontend .
-#        - docker login
-#        - docker push
+
+    - stage: 'Push docker image prod'
+      name: 'Push docker image prod'
+      if: (NOT type IN (pull_request)) AND branch = master
+      script:
+        # build docker image
+        - docker build -t "$DOCKER_USERNAME"/"$SERVICE_IMAGE":"$TAG_NAME" .
+
+        # push image to Docker Hub
+        - docker push "$DOCKER_USERNAME"/"$SERVICE_IMAGE":"$TAG_NAME"
+
+    - stage: 'Upgrade rancher service'
+      name: 'Upgrade rancher service'
+      if: (NOT type IN (pull_request)) AND branch = master
+      script: python ./scripts/upgrade_service.py

@@ -63,6 +63,13 @@ class StoreDependentService {
       });
     }
   }
+
+  catch(error) {
+    throw new AppError(
+      'OPS! Erro ao tentar criar formulario de dependente.',
+      500
+    );
+  }
 }
 
 export default StoreDependentService;

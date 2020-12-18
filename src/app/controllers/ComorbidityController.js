@@ -1,12 +1,10 @@
-import * as Yup from 'yup';
-import Comorbidity from '../models/Comorbidity';
+import ComorbidityService from '../services/ComorbidityService';
 
 class ComorbidityController {
   async index(req, res) {
-    const comorbidities = await Comorbidity.findAll({
-      attributes: ['id', 'comorbidity_description', 'question'],
-    });
-    return res.json(comorbidities);
+    const comorbidities = await new ComorbidityService().findAll();
+
+    return res.status(200).json({ comorbidities });
   }
 }
 

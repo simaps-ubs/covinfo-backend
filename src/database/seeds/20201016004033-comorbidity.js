@@ -57,7 +57,7 @@ module.exports = {
         },
         {
           comorbidity_description: 'Obesidade',
-          question: 'Possui obesidade?',
+          question: 'Acima do peso?',
         },
       ],
       {}
