@@ -26,6 +26,8 @@ class StoreProviderPersonService {
         lng: form.lng,
       });
 
+      console.log(form.pregnant, form.studant, form.deficient,form.interned)
+
       const { id } = await Person.create({
         user_id: form.user_id,
         user_auto_id: null,
@@ -40,6 +42,10 @@ class StoreProviderPersonService {
         father_name: form.father_name,
         quantity_per_home: form.quantity_per_home,
         address_id: address.id,
+        pregnant: form.pregnant,
+        studant: form.studant,
+        deficient: form.deficient,
+        interned: form.interned,
       });
 
       await Phone.create({
