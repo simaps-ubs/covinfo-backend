@@ -29,8 +29,8 @@ class StoreDependentService {
 
 
     const { id } = await Person.create({
-      user_id: form.user_id,
-      user_auto_id: null,
+      user_id: user_dependent.id,
+      user_auto_id: form.provider_user_id,
       document_number: form.document_number,
       birth_date: form.birth_date,
       nationality: form.nationality,
@@ -41,7 +41,7 @@ class StoreDependentService {
       mother_name: form.mother_name,
       father_name: form.father_name,
       quantity_per_home: form.quantity_per_home,
-      address_id: address.id,
+      address_id: providerUser.dataValues.address_id,
       pregnant: form.pregnant,
       studant: form.studant,
       deficient: form.deficient,
