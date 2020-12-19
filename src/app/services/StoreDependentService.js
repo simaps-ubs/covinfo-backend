@@ -43,7 +43,7 @@ class StoreDependentService {
       quantity_per_home: form.quantity_per_home,
       address_id: providerUser.dataValues.address_id,
       pregnant: form.pregnant,
-      student: form.student,
+      student: form.studant,
       deficient: form.deficient,
       interned: form.interned,
     });
