@@ -58,6 +58,26 @@ module.exports = {
         type: Sequelize.STRING(1),
         allowNull: false,
       },
+      student: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
+      deficient: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
+      pregnant: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
+      interned: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
       breed: {
         type: Sequelize.STRING,
         allowNull: false,

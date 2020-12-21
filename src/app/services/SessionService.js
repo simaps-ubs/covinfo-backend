@@ -15,11 +15,16 @@ class SessionService {
       throw new AppError('Usuário ou senha inválidos!', 401);
     }
 
-    const { id } = login;
+    const id  = login.dataValues.user_id
 
-    return jwt.sign({ id }, authConfig.secret, {
-      expiresIn: authConfig.expiresIn,
-    });
+    const data = {
+      user: {id},
+      token: jwt.sign({ id }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn,
+      })
+    }
+
+    return data;
 
   }
 
