@@ -18,7 +18,7 @@ class SessionService {
     const id  = login.dataValues.user_id
 
     const data = {
-      id,
+      user: {id},
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       })
